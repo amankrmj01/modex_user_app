@@ -1,7 +1,7 @@
-// main.dart
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'data/repositories/auth_repository.dart';
+import 'data/repositories/restaurant_repository.dart';
 import 'bloc/auth/auth_bloc.dart';
 import 'presentation/screens/auth/login_screen.dart';
 
@@ -14,13 +14,19 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // Provide the repository to the widget tree
-    return RepositoryProvider(
-      create: (context) => AuthRepository(),
-      child: BlocProvider(
-        create: (context) => AuthBloc(
-          authRepository: RepositoryProvider.of<AuthRepository>(context),
-        ),
+    return MultiRepositoryProvider(
+      providers: [
+        RepositoryProvider(create: (context) => AuthRepository()),
+        RepositoryProvider(create: (context) => RestaurantRepository()),
+      ],
+      child: MultiBlocProvider(
+        providers: [
+          BlocProvider(
+            create: (context) => AuthBloc(
+              authRepository: RepositoryProvider.of<AuthRepository>(context),
+            ),
+          ),
+        ],
         child: MaterialApp(
           title: 'Mini Zomato',
           theme: ThemeData(primarySwatch: Colors.red),
