@@ -1,6 +1,5 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../data/models/cart_model.dart';
-import '../../data/models/menu_item_model.dart';
 import 'cart_event.dart';
 import 'cart_state.dart';
 
@@ -50,8 +49,19 @@ class CartBloc extends Bloc<CartEvent, CartState> {
     final currentState = state.cart;
     List<CartItemModel> updatedItems = List.from(currentState.items);
 
-    // Remove the item
-    updatedItems.removeWhere((item) => item.menuItem.id == event.menuItem.id);
+    int index = updatedItems.indexWhere(
+      (item) => item.menuItem.id == event.menuItem.id,
+    );
+
+    if (updatedItems[index].quantity > 1) {
+      // If quantity is more than 1, decrement it
+      CartItemModel existingItem = updatedItems[index];
+      updatedItems[index] = existingItem.copyWith(
+        quantity: existingItem.quantity - 1,
+      );
+    } else {
+      updatedItems.removeAt(index);
+    }
 
     // Recalculate total price
     double totalPrice = _calculateTotalPrice(updatedItems);

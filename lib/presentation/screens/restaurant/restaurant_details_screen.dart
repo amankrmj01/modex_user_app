@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:modex_user_app/presentation/widgets/common/bottom_bar.dart';
 
 import '../../../bloc/cart/cart_bloc.dart';
 import '../../../bloc/cart/cart_event.dart';
 import '../../../bloc/menu/menu_bloc.dart';
 import '../../../bloc/menu/menu_event.dart';
 import '../../../bloc/menu/menu_state.dart';
+import '../../../data/models/cart_model.dart';
 import '../../../data/models/restaurant_model.dart';
 import '../../../data/repositories/restaurant_repository.dart';
 
@@ -25,6 +27,7 @@ class RestaurantDetailsScreen extends StatelessWidget {
       )..add(FetchMenu(restaurantId: restaurant.id)),
       child: Scaffold(
         backgroundColor: Colors.grey.shade50,
+        bottomNavigationBar: BottomBar(),
         body: CustomScrollView(
           slivers: [
             _buildAppBar(),
@@ -47,19 +50,29 @@ class RestaurantDetailsScreen extends StatelessWidget {
       pinned: true,
       backgroundColor: const Color(0xFF667eea),
       flexibleSpace: FlexibleSpaceBar(
-        title: Text(
-          restaurant.name,
-          style: GoogleFonts.poppins(
-            fontWeight: FontWeight.w600,
-            color: Colors.white,
-            shadows: [
-              Shadow(
-                offset: const Offset(0, 1),
-                blurRadius: 3,
-                color: Colors.black.withOpacity(0.5),
+        title: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Text(
+              restaurant.name,
+              style: GoogleFonts.poppins(
+                fontWeight: FontWeight.w600,
+                color: Colors.white,
+                shadows: [
+                  Shadow(
+                    offset: const Offset(0, 1),
+                    blurRadius: 3,
+                    color: Colors.black.withAlpha((0.5 * 255).toInt()),
+                  ),
+                ],
               ),
-            ],
-          ),
+            ),
+            const SizedBox(height: 4),
+            Text(
+              restaurant.address,
+              style: GoogleFonts.poppins(fontSize: 14, color: Colors.white70),
+            ),
+          ],
         ),
         background: Stack(
           fit: StackFit.expand,
@@ -67,14 +80,17 @@ class RestaurantDetailsScreen extends StatelessWidget {
             Image.network(
               restaurant.imageUrl,
               fit: BoxFit.cover,
-              errorBuilder: (_, __, ___) => _buildImagePlaceholder(),
+              errorBuilder: (_, _, _) => _buildImagePlaceholder(),
             ),
             Container(
               decoration: BoxDecoration(
                 gradient: LinearGradient(
                   begin: Alignment.topCenter,
                   end: Alignment.bottomCenter,
-                  colors: [Colors.transparent, Colors.black.withOpacity(0.7)],
+                  colors: [
+                    Colors.transparent,
+                    Colors.black.withAlpha((0.7 * 255).toInt()),
+                  ],
                 ),
               ),
             ),
@@ -110,18 +126,20 @@ class RestaurantDetailsScreen extends StatelessWidget {
           borderRadius: BorderRadius.circular(16),
           boxShadow: [
             BoxShadow(
-              color: Colors.black.withOpacity(0.08),
+              color: Colors.black.withAlpha((0.08 * 255).toInt()),
               blurRadius: 10,
               offset: const Offset(0, 4),
             ),
           ],
         ),
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
             _buildCuisineAndRating(),
             const SizedBox(height: 16),
             Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 _InfoItem(
                   icon: Icons.access_time,
@@ -154,7 +172,7 @@ class RestaurantDetailsScreen extends StatelessWidget {
         Container(
           padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
           decoration: BoxDecoration(
-            color: const Color(0xFF667eea).withOpacity(0.1),
+            color: const Color(0xFF667eea).withAlpha((0.1 * 255).toInt()),
             borderRadius: BorderRadius.circular(20),
           ),
           child: Text(
@@ -172,7 +190,7 @@ class RestaurantDetailsScreen extends StatelessWidget {
             Icon(Icons.star, size: 20, color: Colors.amber.shade600),
             const SizedBox(width: 4),
             Text(
-              '4.5',
+              restaurant.rating,
               style: GoogleFonts.poppins(
                 fontSize: 16,
                 fontWeight: FontWeight.w600,
@@ -328,7 +346,7 @@ class _MenuErrorView extends StatelessWidget {
         borderRadius: BorderRadius.circular(16),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.08),
+            color: Colors.black.withAlpha((0.08 * 255).toInt()),
             blurRadius: 10,
             offset: const Offset(0, 4),
           ),
@@ -380,7 +398,7 @@ class _MenuErrorView extends StatelessWidget {
 }
 
 class _MenuItemCard extends StatelessWidget {
-  final dynamic item; // Replace with actual MenuItem model
+  final dynamic item;
 
   const _MenuItemCard({required this.item});
 
@@ -393,7 +411,7 @@ class _MenuItemCard extends StatelessWidget {
         borderRadius: BorderRadius.circular(16),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.06),
+            color: Colors.black.withAlpha((0.06 * 255).toInt()),
             blurRadius: 8,
             offset: const Offset(0, 2),
           ),
@@ -405,8 +423,16 @@ class _MenuItemCard extends StatelessWidget {
           children: [
             _buildImage(),
             const SizedBox(width: 16),
-            _buildDetails(),
-            _buildAddToCartButton(context),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  _buildDetails(),
+                  const SizedBox(height: 12),
+                  _buildAddToCartButton(context),
+                ],
+              ),
+            ),
           ],
         ),
       ),
@@ -428,39 +454,38 @@ class _MenuItemCard extends StatelessWidget {
   }
 
   Widget _buildDetails() {
-    return Expanded(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            item.name,
-            style: GoogleFonts.poppins(
-              fontSize: 16,
-              fontWeight: FontWeight.w600,
-              color: Colors.grey.shade800,
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Row(
+          children: [
+            Text(
+              item.name,
+              style: GoogleFonts.poppins(
+                fontSize: 16,
+                fontWeight: FontWeight.w600,
+                color: Colors.grey.shade800,
+              ),
             ),
-          ),
-          const SizedBox(height: 4),
-          Text(
-            item.description,
-            style: GoogleFonts.poppins(
-              fontSize: 14,
-              color: Colors.grey.shade600,
+            const Spacer(),
+            Text(
+              '\$${item.price.toStringAsFixed(2)}',
+              style: GoogleFonts.poppins(
+                fontSize: 18,
+                fontWeight: FontWeight.w700,
+                color: const Color(0xFF667eea),
+              ),
             ),
-            maxLines: 2,
-            overflow: TextOverflow.ellipsis,
-          ),
-          const SizedBox(height: 8),
-          Text(
-            '\$${item.price.toStringAsFixed(2)}',
-            style: GoogleFonts.poppins(
-              fontSize: 18,
-              fontWeight: FontWeight.w700,
-              color: const Color(0xFF667eea),
-            ),
-          ),
-        ],
-      ),
+          ],
+        ),
+        const SizedBox(height: 4),
+        Text(
+          item.description,
+          style: GoogleFonts.poppins(fontSize: 14, color: Colors.grey.shade600),
+          maxLines: 2,
+          overflow: TextOverflow.ellipsis,
+        ),
+      ],
     );
   }
 
@@ -473,51 +498,114 @@ class _MenuItemCard extends StatelessWidget {
         borderRadius: BorderRadius.circular(12),
         boxShadow: [
           BoxShadow(
-            color: const Color(0xFF667eea).withOpacity(0.3),
+            color: const Color(0xFF667eea).withAlpha((0.3 * 255).toInt()),
             blurRadius: 8,
             offset: const Offset(0, 4),
           ),
         ],
       ),
-      child: Material(
-        color: Colors.transparent,
-        child: InkWell(
-          borderRadius: BorderRadius.circular(12),
-          onTap: () {
-            context.read<CartBloc>().add(AddItemToCart(item));
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          InkWell(
+            borderRadius: BorderRadius.circular(12),
+            onTap: () {
+              context.read<CartBloc>().add(RemoveItemFromCart(item));
 
-            ScaffoldMessenger.of(context)
-              ..hideCurrentSnackBar()
-              ..showSnackBar(
-                SnackBar(
-                  content: Row(
-                    children: [
-                      const Icon(Icons.check_circle, color: Colors.white),
-                      const SizedBox(width: 12),
-                      Expanded(
-                        child: Text(
-                          '${item.name} added to cart!',
-                          style: GoogleFonts.poppins(
-                            fontWeight: FontWeight.w500,
+              ScaffoldMessenger.of(context)
+                ..hideCurrentSnackBar()
+                ..showSnackBar(
+                  SnackBar(
+                    content: Row(
+                      children: [
+                        const Icon(Icons.info, color: Colors.white),
+                        const SizedBox(width: 12),
+                        Expanded(
+                          child: Text(
+                            '${item.name} removed from cart!',
+                            style: GoogleFonts.poppins(
+                              fontWeight: FontWeight.w500,
+                            ),
                           ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
+                    backgroundColor: Colors.orange.shade600,
+                    behavior: SnackBarBehavior.floating,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                    margin: const EdgeInsets.all(16),
                   ),
-                  backgroundColor: Colors.green.shade600,
-                  behavior: SnackBarBehavior.floating,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(12),
-                  ),
-                  margin: const EdgeInsets.all(16),
-                ),
-              );
-          },
-          child: const Padding(
-            padding: EdgeInsets.all(12),
-            child: Icon(Icons.add_shopping_cart, color: Colors.white, size: 20),
+                );
+            },
+            child: const Padding(
+              padding: EdgeInsets.all(12),
+              child: Icon(Icons.remove, color: Colors.white, size: 20),
+            ),
           ),
-        ),
+          Container(
+            color: Colors.white,
+            width: 50,
+            height: 40,
+            alignment: Alignment.center,
+            child: Builder(
+              builder: (context) {
+                final cartState = context.watch<CartBloc>().state;
+                final cartItem = cartState.cart.items.firstWhere(
+                  (ci) => ci.menuItem.id == item.id,
+                  orElse: () => CartItemModel(menuItem: item, quantity: 0),
+                );
+                final quantity = cartItem.quantity;
+                return Text(
+                  quantity.toString(),
+                  style: GoogleFonts.poppins(
+                    fontSize: 16,
+                    fontWeight: FontWeight.w600,
+                    color: Colors.black,
+                  ),
+                );
+              },
+            ),
+          ),
+          InkWell(
+            borderRadius: BorderRadius.circular(12),
+            onTap: () {
+              context.read<CartBloc>().add(AddItemToCart(item));
+
+              ScaffoldMessenger.of(context)
+                ..hideCurrentSnackBar()
+                ..showSnackBar(
+                  SnackBar(
+                    content: Row(
+                      children: [
+                        const Icon(Icons.check_circle, color: Colors.white),
+                        const SizedBox(width: 12),
+                        Expanded(
+                          child: Text(
+                            '${item.name} added to cart!',
+                            style: GoogleFonts.poppins(
+                              fontWeight: FontWeight.w500,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                    backgroundColor: Colors.green.shade600,
+                    behavior: SnackBarBehavior.floating,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                    margin: const EdgeInsets.all(16),
+                  ),
+                );
+            },
+            child: const Padding(
+              padding: EdgeInsets.all(12),
+              child: Icon(Icons.add, color: Colors.white, size: 20),
+            ),
+          ),
+        ],
       ),
     );
   }

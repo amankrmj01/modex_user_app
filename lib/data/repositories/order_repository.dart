@@ -2,7 +2,6 @@ import '../models/cart_model.dart';
 import '../models/order_model.dart';
 
 class OrderRepository {
-  // A mock database of past orders.
   final List<OrderModel> _orders = [];
 
   Future<OrderModel> placeOrder(CartModel cart) async {

@@ -49,7 +49,7 @@ class LoginScreen extends StatelessWidget {
                 child: Container(
                   padding: const EdgeInsets.all(20),
                   decoration: BoxDecoration(
-                    color: Colors.white.withOpacity(0.9),
+                    color: Colors.white.withAlpha((0.9 * 255).toInt()),
                     borderRadius: BorderRadius.circular(15),
                   ),
                   child: Column(
@@ -83,11 +83,11 @@ class LoginScreen extends StatelessWidget {
                     constraints: const BoxConstraints(maxWidth: 400),
                     padding: const EdgeInsets.all(32.0),
                     decoration: BoxDecoration(
-                      color: Colors.white.withOpacity(0.95),
+                      color: Colors.white.withAlpha((0.95 * 255).toInt()),
                       borderRadius: BorderRadius.circular(20),
                       boxShadow: [
                         BoxShadow(
-                          color: Colors.black.withOpacity(0.1),
+                          color: Colors.black.withAlpha((0.1 * 255).toInt()),
                           blurRadius: 20,
                           offset: const Offset(0, 10),
                         ),
@@ -107,7 +107,9 @@ class LoginScreen extends StatelessWidget {
                             borderRadius: BorderRadius.circular(20),
                             boxShadow: [
                               BoxShadow(
-                                color: const Color(0xFF667eea).withOpacity(0.3),
+                                color: const Color(
+                                  0xFF667eea,
+                                ).withAlpha((0.3 * 255).toInt()),
                                 blurRadius: 15,
                                 offset: const Offset(0, 5),
                               ),
@@ -146,7 +148,9 @@ class LoginScreen extends StatelessWidget {
                           decoration: BoxDecoration(
                             boxShadow: [
                               BoxShadow(
-                                color: Colors.grey.withOpacity(0.1),
+                                color: Colors.grey.withAlpha(
+                                  (0.1 * 255).toInt(),
+                                ),
                                 blurRadius: 10,
                                 offset: const Offset(0, 2),
                               ),
@@ -193,7 +197,9 @@ class LoginScreen extends StatelessWidget {
                           decoration: BoxDecoration(
                             boxShadow: [
                               BoxShadow(
-                                color: Colors.grey.withOpacity(0.1),
+                                color: Colors.grey.withAlpha(
+                                  (0.1 * 255).toInt(),
+                                ),
                                 blurRadius: 10,
                                 offset: const Offset(0, 2),
                               ),
@@ -264,7 +270,9 @@ class LoginScreen extends StatelessWidget {
                             borderRadius: BorderRadius.circular(12),
                             boxShadow: [
                               BoxShadow(
-                                color: const Color(0xFF667eea).withOpacity(0.4),
+                                color: const Color(
+                                  0xFF667eea,
+                                ).withAlpha((0.4 * 255).toInt()),
                                 blurRadius: 15,
                                 offset: const Offset(0, 5),
                               ),
