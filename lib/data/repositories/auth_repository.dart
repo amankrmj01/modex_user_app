@@ -11,4 +11,28 @@ class AuthRepository {
       throw Exception('Invalid credentials');
     }
   }
+
+  // Simulate user registration
+  Future<UserModel> signup({
+    required String firstName,
+    required String lastName,
+    required String email,
+    required String phone,
+    required String password,
+  }) async {
+    await Future.delayed(const Duration(seconds: 2));
+    // In a real app, you'd create the account in your backend
+    if (email.isNotEmpty &&
+        password.isNotEmpty &&
+        firstName.isNotEmpty &&
+        lastName.isNotEmpty) {
+      return UserModel(
+        id: 'user_${DateTime.now().millisecondsSinceEpoch}',
+        email: email,
+        name: '$firstName $lastName',
+      );
+    } else {
+      throw Exception('Invalid registration data');
+    }
+  }
 }
