@@ -7,11 +7,6 @@ class OrderRepository {
   Future<OrderModel> placeOrder(CartModel cart) async {
     await Future.delayed(const Duration(seconds: 2));
 
-    // Simulate a potential failure
-    // if (cart.totalPrice > 50.0) {
-    //   throw Exception("Payment Failed!");
-    // }
-
     final newOrder = OrderModel(
       id: 'ord_${DateTime.now().millisecondsSinceEpoch}',
       items: cart.items,
@@ -25,7 +20,6 @@ class OrderRepository {
 
   Future<List<OrderModel>> fetchOrderHistory() async {
     await Future.delayed(const Duration(seconds: 1));
-    // Return a copy of the list, sorted by most recent first.
     return List.from(_orders.reversed);
   }
 }

@@ -16,23 +16,19 @@ class CartBloc extends Bloc<CartEvent, CartState> {
     final currentState = state.cart;
     List<CartItemModel> updatedItems = List.from(currentState.items);
 
-    // Check if item already exists
     int index = updatedItems.indexWhere(
       (item) => item.menuItem.id == event.menuItem.id,
     );
 
     if (index != -1) {
-      // Item exists, increment quantity
       CartItemModel existingItem = updatedItems[index];
       updatedItems[index] = existingItem.copyWith(
         quantity: existingItem.quantity + 1,
       );
     } else {
-      // Item does not exist, add it
       updatedItems.add(CartItemModel(menuItem: event.menuItem, quantity: 1));
     }
 
-    // Recalculate total price
     double totalPrice = _calculateTotalPrice(updatedItems);
 
     emit(
@@ -54,7 +50,6 @@ class CartBloc extends Bloc<CartEvent, CartState> {
     );
 
     if (updatedItems[index].quantity > 1) {
-      // If quantity is more than 1, decrement it
       CartItemModel existingItem = updatedItems[index];
       updatedItems[index] = existingItem.copyWith(
         quantity: existingItem.quantity - 1,
@@ -63,7 +58,6 @@ class CartBloc extends Bloc<CartEvent, CartState> {
       updatedItems.removeAt(index);
     }
 
-    // Recalculate total price
     double totalPrice = _calculateTotalPrice(updatedItems);
 
     emit(

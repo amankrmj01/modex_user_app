@@ -59,8 +59,6 @@ class LoginScreen extends StatelessWidget {
   }
 }
 
-//
-// -------- Loading Overlay --------
 class _LoadingOverlay extends StatelessWidget {
   const _LoadingOverlay();
 
@@ -95,8 +93,6 @@ class _LoadingOverlay extends StatelessWidget {
   }
 }
 
-//
-// -------- Login Form --------
 class _LoginForm extends StatelessWidget {
   final TextEditingController emailController;
   final TextEditingController passwordController;
@@ -158,8 +154,6 @@ class _LoginForm extends StatelessWidget {
   }
 }
 
-//
-// -------- Small Widgets --------
 class _Logo extends StatelessWidget {
   @override
   Widget build(BuildContext context) {

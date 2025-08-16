@@ -41,9 +41,6 @@ class RestaurantDetailsScreen extends StatelessWidget {
     );
   }
 
-  // ------------------------------
-  // Section 1: AppBar
-  // ------------------------------
   Widget _buildAppBar() {
     return SliverAppBar(
       expandedHeight: 250,
@@ -113,9 +110,6 @@ class RestaurantDetailsScreen extends StatelessWidget {
     );
   }
 
-  // ------------------------------
-  // Section 2: Restaurant Info
-  // ------------------------------
   Widget _buildRestaurantInfo() {
     return SliverToBoxAdapter(
       child: Container(
@@ -210,9 +204,6 @@ class RestaurantDetailsScreen extends StatelessWidget {
     );
   }
 
-  // ------------------------------
-  // Section 3: Menu Header
-  // ------------------------------
   Widget _buildMenuHeader() {
     return SliverToBoxAdapter(
       child: Padding(
@@ -229,9 +220,6 @@ class RestaurantDetailsScreen extends StatelessWidget {
     );
   }
 
-  // ------------------------------
-  // Section 4: Menu List via Bloc
-  // ------------------------------
   Widget _buildMenuList() {
     return BlocBuilder<MenuBloc, MenuState>(
       builder: (context, state) {
@@ -264,9 +252,6 @@ class RestaurantDetailsScreen extends StatelessWidget {
   }
 }
 
-// -------------------------------------------------------------
-// Reusable Small Widgets
-// -------------------------------------------------------------
 class _InfoItem extends StatelessWidget {
   final IconData icon;
   final String value;

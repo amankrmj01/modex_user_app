@@ -17,7 +17,6 @@ class SignupScreen extends StatefulWidget {
 class _SignupScreenState extends State<SignupScreen> {
   final _formKey = GlobalKey<FormState>();
 
-  // Controllers
   final _nameController = TextEditingController();
   final _emailController = TextEditingController();
   final _phoneController = TextEditingController();
@@ -121,8 +120,6 @@ class _SignupScreenState extends State<SignupScreen> {
   }
 }
 
-//
-// ---------- Loading Overlay ----------
 class _LoadingOverlay extends StatelessWidget {
   const _LoadingOverlay();
 
@@ -157,8 +154,6 @@ class _LoadingOverlay extends StatelessWidget {
   }
 }
 
-//
-// ---------- Signup Form ----------
 class _SignupForm extends StatelessWidget {
   final GlobalKey<FormState> formKey;
   final TextEditingController nameController;
@@ -284,8 +279,6 @@ class _SignupForm extends StatelessWidget {
   }
 }
 
-//
-// ---------- Common Small Widgets ----------
 class _Logo extends StatelessWidget {
   @override
   Widget build(BuildContext context) {

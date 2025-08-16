@@ -46,8 +46,6 @@ class CartScreen extends StatelessWidget {
   }
 }
 
-//
-// ---------- Empty Cart View ----------
 class _EmptyCartView extends StatelessWidget {
   const _EmptyCartView();
 
@@ -119,8 +117,6 @@ class _EmptyCartView extends StatelessWidget {
   }
 }
 
-//
-// ---------- Cart Items List ----------
 class _CartItemsList extends StatelessWidget {
   final List<dynamic> items; // replace with CartItem type
   const _CartItemsList({required this.items});
@@ -367,8 +363,6 @@ class _ItemAdd extends StatelessWidget {
   }
 }
 
-//
-// ---------- Order Summary ----------
 class _OrderSummary extends StatelessWidget {
   final CartState cartState;
 
@@ -471,8 +465,6 @@ class _SummaryRow extends StatelessWidget {
   }
 }
 
-//
-// ---------- Place Order Button ----------
 class _PlaceOrderButton extends StatelessWidget {
   final CartState cartState;
 

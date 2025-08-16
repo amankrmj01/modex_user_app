@@ -80,7 +80,6 @@ class RestaurantRepository {
         ),
       ];
     } else {
-      // Default menu for other restaurants
       return const [
         MenuItemModel(
           id: 'm5',

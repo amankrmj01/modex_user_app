@@ -35,9 +35,6 @@ class MyOrdersScreen extends StatelessWidget {
   }
 }
 
-// ---------------------------------------------------
-// Orders Body with BlocBuilder
-// ---------------------------------------------------
 class _OrdersBody extends StatelessWidget {
   const _OrdersBody();
 
@@ -70,9 +67,6 @@ class _OrdersBody extends StatelessWidget {
   }
 }
 
-// ---------------------------------------------------
-// Loading View
-// ---------------------------------------------------
 class _OrdersLoadingView extends StatelessWidget {
   const _OrdersLoadingView();
 
@@ -99,9 +93,6 @@ class _OrdersLoadingView extends StatelessWidget {
   }
 }
 
-// ---------------------------------------------------
-// Empty Orders View
-// ---------------------------------------------------
 class _NoOrdersView extends StatelessWidget {
   const _NoOrdersView();
 
@@ -173,9 +164,6 @@ class _NoOrdersView extends StatelessWidget {
   }
 }
 
-// ---------------------------------------------------
-// Error View
-// ---------------------------------------------------
 class _OrdersErrorView extends StatelessWidget {
   final String message;
   final VoidCallback onRetry;
@@ -229,11 +217,9 @@ class _OrdersErrorView extends StatelessWidget {
   }
 }
 
-// ---------------------------------------------------
-// Order Card
-// ---------------------------------------------------
 class _OrderCard extends StatelessWidget {
-  final dynamic order; // Replace with your actual order model
+  final dynamic order;
+
   const _OrderCard({required this.order});
 
   @override
@@ -364,9 +350,6 @@ class _OrderCard extends StatelessWidget {
   }
 }
 
-// ---------------------------------------------------
-// Order Details
-// ---------------------------------------------------
 class _OrderDetails extends StatelessWidget {
   final dynamic order;
 
@@ -401,9 +384,6 @@ class _OrderDetails extends StatelessWidget {
   }
 }
 
-// ---------------------------------------------------
-// Order Item Tile
-// ---------------------------------------------------
 class _OrderItemTile extends StatelessWidget {
   final dynamic item;
 
@@ -476,9 +456,6 @@ class _OrderItemTile extends StatelessWidget {
   }
 }
 
-// ---------------------------------------------------
-// Order Total Row
-// ---------------------------------------------------
 class _OrderTotal extends StatelessWidget {
   final double total;
 

@@ -59,9 +59,6 @@ class HomeScreen extends StatelessWidget {
   }
 }
 
-// ---------------------------------------------------
-// Body with BlocBuilder
-// ---------------------------------------------------
 class _HomeBody extends StatelessWidget {
   const _HomeBody();
 
@@ -90,9 +87,6 @@ class _HomeBody extends StatelessWidget {
   }
 }
 
-// ---------------------------------------------------
-// Loading View
-// ---------------------------------------------------
 class _LoadingView extends StatelessWidget {
   const _LoadingView();
 
@@ -119,9 +113,6 @@ class _LoadingView extends StatelessWidget {
   }
 }
 
-// ---------------------------------------------------
-// Restaurant List
-// ---------------------------------------------------
 class _RestaurantList extends StatelessWidget {
   final List<dynamic> restaurants;
 
@@ -140,9 +131,6 @@ class _RestaurantList extends StatelessWidget {
   }
 }
 
-// ---------------------------------------------------
-// Restaurant Card
-// ---------------------------------------------------
 class _RestaurantCard extends StatelessWidget {
   final dynamic restaurant;
 
@@ -188,9 +176,6 @@ class _RestaurantCard extends StatelessWidget {
   }
 }
 
-// ---------------------------------------------------
-// Restaurant Image
-// ---------------------------------------------------
 class _RestaurantImage extends StatelessWidget {
   final String imageUrl;
 
@@ -267,9 +252,6 @@ class _ImageLoadingIndicator extends StatelessWidget {
   }
 }
 
-// ---------------------------------------------------
-// Restaurant Info
-// ---------------------------------------------------
 class _RestaurantInfo extends StatelessWidget {
   final dynamic restaurant;
 
@@ -334,9 +316,6 @@ class _RestaurantInfo extends StatelessWidget {
   }
 }
 
-// ---------------------------------------------------
-// Arrow Icon
-// ---------------------------------------------------
 class _ArrowIcon extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -355,9 +334,6 @@ class _ArrowIcon extends StatelessWidget {
   }
 }
 
-// ---------------------------------------------------
-// Error View
-// ---------------------------------------------------
 class _ErrorView extends StatelessWidget {
   final String message;
   final VoidCallback onRetry;
@@ -411,9 +387,6 @@ class _ErrorView extends StatelessWidget {
   }
 }
 
-// ---------------------------------------------------
-// Empty Initial Welcome View
-// ---------------------------------------------------
 class _InitialView extends StatelessWidget {
   const _InitialView();
 
@@ -447,9 +420,6 @@ class _InitialView extends StatelessWidget {
   }
 }
 
-// ---------------------------------------------------
-// Empty Restaurants View
-// ---------------------------------------------------
 class _EmptyView extends StatelessWidget {
   const _EmptyView();
 

@@ -1,7 +1,6 @@
 import 'package:equatable/equatable.dart';
 import 'menu_item_model.dart';
 
-// Represents a single item within the cart, including its quantity.
 class CartItemModel extends Equatable {
   final MenuItemModel menuItem;
   final int quantity;
